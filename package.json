@@ -1,0 +1,16 @@
+{
+  "name": "@iconara/athena-js",
+  "version": "0.1.0",
+  "description": "A client for Amazon Athena",
+  "main": "index.js",
+  "homepage": "https://github.com/iconara/athena-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iconara/athena-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iconara/athena-js/issues"
+  },
+  "author": "Theo Tolv <theo@iconara.net>",
+  "license": "MIT"
+}
