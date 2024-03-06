@@ -2,7 +2,9 @@
   "name": "@iconara/athena-js",
   "version": "0.1.0",
   "description": "A client for Amazon Athena",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "homepage": "https://github.com/iconara/athena-js#readme",
   "repository": {
     "type": "git",
@@ -12,5 +14,13 @@
     "url": "https://github.com/iconara/athena-js/issues"
   },
   "author": "Theo Tolv <theo@iconara.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "lint": "tsc"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  }
 }
