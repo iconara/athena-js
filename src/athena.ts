@@ -108,6 +108,24 @@ type AthenaConfig = {
   logger?: Logger
 }
 
+function toStringLiteral(str: string): string {
+  return `'${str.replace(/'/g, '\'\'')}'`
+}
+
+function toLiteral(value: string | number | Date | Array<any> | null | undefined): string {
+  if (value === null || value === undefined) {
+    return 'NULL'
+  } else if (value instanceof Date) {
+    return `DATE ${toStringLiteral(value.toISOString().replace(/T/, ' ').replace(/\D+$/, ''))}`
+  } else if (Array.isArray(value)) {
+    return `ARRAY[${value.map(toLiteral).join(', ')}]`
+  } else if (typeof value === 'number') {
+    return value.toString()
+  } else {
+    return toStringLiteral(value)
+  }
+}
+
 export class Athena {
   static TERMINAL_STATES = ['SUCCEEDED', 'FAILED', 'CANCELED']
 
@@ -123,10 +141,13 @@ export class Athena {
     this.#logger = config.logger ?? NullLogger
   }
 
-  async query(sql: string): Promise<ResultSet> {
+  async query(sql: string, parameters: string[] | undefined = undefined): Promise<ResultSet> {
     const startCommandInput: StartQueryExecutionCommandInput = {
       WorkGroup: this.#workGroup,
       QueryString: sql,
+    }
+    if (parameters !== undefined && parameters.length > 0) {
+      startCommandInput.ExecutionParameters = parameters.map(toLiteral)
     }
     if (this.#resultReuseMaxAge !== undefined) {
       startCommandInput.ResultReuseConfiguration = {
