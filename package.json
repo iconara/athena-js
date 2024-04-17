@@ -16,7 +16,7 @@
   "author": "Theo Tolv <theo@iconara.net>",
   "license": "MIT",
   "scripts": {
-    "build": "tsup index.ts --format cjs,esm --dts",
+    "build": "tsup",
     "lint": "tsc"
   },
   "devDependencies": {
