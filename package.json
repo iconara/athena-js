@@ -1,6 +1,6 @@
 {
   "name": "@iconara/athena-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A client for Amazon Athena",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
